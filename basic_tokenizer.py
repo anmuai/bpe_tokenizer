@@ -86,7 +86,7 @@ class BasicTokenizer:
             self.merges[merge_candidate] = merge_idx
 
             if verbose:
-                print(f"merge {i + 1}/{n_merges}: {merge_candidate} -> {merge_idx} ({self.vocab[merge_idx]}) had {self.merges[merge_candidate]} occurrences")
+                print(f"merge {i + 1}/{n_merges}: {merge_candidate} -> {merge_idx} ({self.vocab[merge_idx]}) had {pair_count[merge_candidate]} occurrences")
 
             merge_idx += 1
 
@@ -124,7 +124,7 @@ class BasicTokenizer:
 if __name__ == '__main__':
     tokenizer = BasicTokenizer()
     text = "aaabdaaabac"
-    tokenizer.train(text, 256 + 3)  # 256 are the byte tokens, then do 3 merges
+    tokenizer.train(text, 256 + 3, verbose = True)  # 256 are the byte tokens, then do 3 merges
     print(tokenizer.merges)
     print(tokenizer.encode(text))
     encoded = tokenizer.encode(text)
